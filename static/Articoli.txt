@@ -1,0 +1,16 @@
+Da un paio di settimane circa, ho iniziato a fare le challenge sul sito pwnable.kr (ve lo consiglio se siete alle prime armi con le pwn/binary exploitation) e ieri sera mi sono imbatutto in questa challenge particolare. <br>Non entrerò nel dettaglio della risoluzione(per quella ho creato un writeup su <a href>github</a>), bensì vorrei approfittarne per parlare di una cosa che ho imparato grazie a questa challenge: usare il C per fare piping tra processi.
+<br> Facciamo un passo indietro: avete mai usato linux?(Se siete finiti su questo blog, spero proprio di sì) Vi è mai capitato di dover ""concatenare"" due comandi insieme su shell? Vi faccio un esempio: <br><code>cat file.txt | grep "stringaparticolare"</code><br>Cosa abbiamo fatto? Semplice: leggiamo file.txt con il comando cat(stampando il contenuto sullo standard output) e poi ""concateniamo"" il risultato del comando <code>cat</code> con il comando <code>grep</code> per filtrare il file e per cercare qualcosa in particolare.<br> Vi siete mai chiesti cosa fa effettivamente la shell sotto la scocca quando usiamo il simbolo di pipe <code>|</code> ? Beh, io no, però la challenge di ieri sera mi ha fatto sorgere questo quesito.
+<br> Partiamo dal nome della barra verticale che usiamo per questa ""concatenazione"",che si chiama pipe.<br><i>Perché si chiama così?</i>
+<br> Dall'inglese sappiamo che "pipe" significa "tubo"...ma cosa c'entra con la concatenazione su shell?
+<br> Lasciate che vi spieghi quello che succede con un disegno. 
+<br> Prendiamo in considerazione due processi P1 e P2, che corrispondono ai due programmi di cui vogliamo fare il pipe.
+<br>
+<br>
+<img class="text-center container-fluid" src="./explained.png">
+<br>
+<br>
+Bene, quello che succede è che viene creato effettivamente un tubo o "pipe" tra i due processi che permette loro di comunicare. In particolare, nel nostro caso, quello che succede è che il processo scriverà l'output del suo comando non più sullo standard input, bensì su una delle due estremità del tubo. Il secondo processo non leggerà dallo standard input, ma dall'altra estremità del tubo. In questo modo i due processi risultano collegati. Una volta che il primo processo ha mandato tutto l'output al secondo processo, esso può essere tranquillamente ucciso, e continuerà l'esecuzione del secondo processo.
+<br>
+<br>
+Come dicevo prima, questo può essere implementato anche in C, in modo tale da avere cooperazione tra più processi. Come facciamo? Fortunatamente in C esiste una funzione chiamata pipe che, dato un array di due interi, genera una coppia di file descriptor che permettono ai due processi di leggere/scrivere. Questo è il prototipo della funzione pipe: <code>int pipe(int fd[2]);</code><br>
+Oltre alla funzione <code>pipe</code>, esiste anche la funzione <code>dup2</code>, che permette di collegare uno degli standard stream (stdin, stdout, stderr) a una delle estremità del tubo. Questo è il prototipo della funzione: <code>int dup2(int oldfd, int newfd);</code>

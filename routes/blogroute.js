@@ -2,6 +2,7 @@
 exports.__esModule = true;
 exports.blogroute = void 0;
 var express = require("express");
+var database_1 = require("../database");
 var fetch = require('node-fetch');
 var route = express.Router();
 exports.blogroute = route;
@@ -43,18 +44,19 @@ route.get('/git/:text', function (req, res) {
         for (var i = 0; i < data.length; i++) {
             n[i] = data[i].name;
         }
-        console.log(n);
         res.render('githubwriteups', { contents: n, content: undefined, prefix: req.params.text });
     })["catch"](function (err) { return console.log(err); });
 });
 route.get('/git/:pr/:text', function (req, res) {
     var converter = new showdown.Converter();
-    var html = converter.makeHtml('# This is a test!');
-    console.log(html);
+    var html = converter.makeHtml('# This is a test!'); //Devo riuscire ad ottenere il markdown dei file git
     res.render('githubwriteups', { contents: undefined, content: html, prefix: undefined });
     //DA SISTEMARE
-    fetch('https://raw.githubusercontent.com/LukeGix/CTF-Writeups/master/' + req.params.pr + '/' + req.params.text, { mode: 'no-cors' })
-        .then(function (data) {
-        console.log(data);
-    })["catch"](function (err) { return console.log(err); });
+});
+route.get('/researches', function (req, res) {
+    database_1.GBlog(function (rensp) {
+        console.log(rensp);
+        var blogs = rensp;
+        res.render('researches', { b: blogs });
+    }, null);
 });

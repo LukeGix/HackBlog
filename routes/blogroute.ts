@@ -1,4 +1,5 @@
 import * as express from "express"
+import {GPass , GCookie, GBlog} from '../database';
 let fetch = require('node-fetch');
 let route : any = express.Router();
 let showdown = require('showdown');
@@ -58,5 +59,24 @@ route.get('/git/:pr/:text', (req, res) =>{
 	//DA SISTEMARE
 
 	
+})
+
+route.get('/researches', (req, res) => {
+	GBlog((rensp) => {
+		console.log(rensp);
+		let blogs : object[] = rensp;
+		res.render('researches', {b: blogs});
+	}, null)
+
+
+})
+
+
+route.get('/researches/:title', (req, res) => {
+	GBlog((rensp) => {
+		console.log(rensp);
+	}, {Title: req.params.title})
+
+
 })
 export {route as blogroute};

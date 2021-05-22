@@ -6,41 +6,55 @@ let mongoose = require('mongoose');
 let dburi : string = "mongodb://localhost:27017/LocalApp";
 
 let GetPass : Function = function f(callback : Function){
-		mongoose.connect(dburi);
+		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 		let conn = mongoose.connection;
 		conn.once('open', () => {
 			console.log('[*]Connesso al db[*]');
 			User.findOne({name:'admin'} , (err, data) =>{
 				if(err) throw err;
 				callback(data);
+				conn.close();
 			})
 		})
 }
 
 
 let GetCookie : Function = function(callback : Function){
-		mongoose.connect(dburi);
+		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 		let conn = mongoose.connection;
 		conn.once('open', () => {
 			console.log('[*]Connesso al db[*]');
 			Cookie.findOne({role:'admin'} , (err, data) =>{
 				if(err) throw err;
 				callback(data.password);
+				conn.close();
 			})
 		})
 
-		//conn.close();
+		
 	}
-
+//Questa è per trovare un solo blog element, devo inserire anche quella per trovarli tutti
 let GetBlog : Function = function(callback : Function, params){
-		mongoose.connect(dburi);
+		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 		let conn = mongoose.connection;
 		conn.once('open', () => {
 			console.log('[*]Connesso al db[*]');
-			Blog.findOne(params , (err, data) =>{
+			if(params !== null){
+				Blog.findOne(params , (err, data) =>{
+					callback(data);
+					conn.close();
+				})
+			}else if(params === null){
+				//DEVO TROVARLI TUTTI
+				Blog.find({} , (err, data) => {
+					callback(data);
+					conn.close();
+				})
 
-				callback(data);
-			})
+			}else{
+				console.log('Error');
+				conn.close()
+			}
 		})
 
 	}

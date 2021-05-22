@@ -15,9 +15,11 @@ route.post('/', function (req, res) {
         console.log(rensp);
         if (crypto_1.createHash('md5').update(req.body.password).digest('hex') === rensp.password) {
             console.log('Success!');
+            res.render('login-success', { user: req.body.username });
         }
         else {
             console.log('fail');
+            res.render('fail');
         }
     });
 });

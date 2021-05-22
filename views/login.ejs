@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<%- include('head.ejs')%>
+</head>
+<body>
+	<div class="mask">
+		<div class="container-fluid text-white">
+			<%- include('header.ejs')%>
+			<div class="container-fluid text-center">
+				<h1>Accedi all'area riservata per admin</h1>
+				<br>
+				<form>
+					<p>Username</p><input type="text" name="user" />
+					<p>Password</p><input type="password" name="password" /><br><br>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</div>
+		<%- include('footer.ejs')%>
+	</div>
+
+</body>
+</html>

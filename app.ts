@@ -9,7 +9,7 @@ const options : any = {
 	cert : fs.readFileSync('certs/server.crt'),
 	key : fs.readFileSync('certs/server.key')
 }
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(obj.root + '/static/css'));
 app.use(express.static(obj.root + '/static/img'));

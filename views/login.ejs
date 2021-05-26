@@ -9,13 +9,14 @@
 		<div class="container-fluid text-white">
 			<%- include('header.ejs')%>
 			<div class="container-fluid text-center">
-				<h1>Accedi all'area riservata per admin</h1>
+				<h1>Accedi</h1>
 				<br>
-				<form>
+				<form action="/Login" method="POST">
 					<p>Username</p><input type="text" name="user" />
 					<p>Password</p><input type="password" name="password" /><br><br>
 					<input type="submit" value="Submit">
 				</form>
+				<p>Non ti sei ancora registrato????? MA QUESTO E' INAUDITO! Please, <a href="https://localhost:1337/Register">rimedia subito</a></p>
 			</div>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>

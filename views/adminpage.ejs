@@ -1,20 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style type="text/css">
-		.wrapper {
-		    display: flex;
-		    width: 13%;
-		    align-items: stretch;
-		}
-
-		#button-scheleton{
-			display: flex;
-			width: 5%;
-			height: 100%;
-		}
-
-	</style>
+	<link rel="stylesheet" type="text/css" href="https://localhost:1337/adminpage.css">
 	<title>Welcome admin!</title>
 	<%- include('head.ejs')%>
 </head>
@@ -22,69 +9,50 @@
 	<div class="mask">
 		<div class="container-fluid text-white">
 			<div class="container-fluid text-center">
+				<!-- Begin sidebar -->
 				<div class="wrapper">
-					<nav id="sidebar">
-						<div class="sidebar-header">
-							<h1>Admin page</h1>
+					<div id="sidebar">
+						<div class="sidebar-header text-center">
+							<h3>Admin page</h3>
 						</div>
+						<div id="elements" class="text-center">
+								<a href="javascript:void(0)" onclick="closeNav()" id="closebtn">&times;</a>
+								<a href="https://localhost:1337/admin/newblog">Crea nuovo articolo</a>
+								<a href="#">Modifica articoli</a>							
+						</div>
+					</div>
+				</div>	
+				<!-- End sidebar -->
 
-							<ul class="list-unstyled components">
-					            <p>Dummy Heading</p>
-					            <li class="active">
-					                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-					                <ul class="collapse list-unstyled" id="homeSubmenu">
-					                    <li>
-					                        <a href="#">Home 1</a>
-					                    </li>
-					                    <li>
-					                        <a href="#">Home 2</a>
-					                    </li>
-					                    <li>
-					                        <a href="#">Home 3</a>
-					                    </li>
-					                </ul>
-					            </li>
-					            <li>
-					                <a href="#">About</a>
-					            </li>
-					            <li>
-					                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-					                <ul class="collapse list-unstyled" id="pageSubmenu">
-					                    <li>
-					                        <a href="#">Page 1</a>
-					                    </li>
-					                    <li>
-					                        <a href="#">Page 2</a>
-					                    </li>
-					                    <li>
-					                        <a href="#">Page 3</a>
-					                    </li>
-					                </ul>
-					            </li>
-					            <li>
-					                <a href="#">Portfolio</a>
-					            </li>
-					            <li>
-					                <a href="#">Contact</a>
-					            </li>
-					        </ul>
-						
-					</nav>
+				<div>
+					<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Open</span>
 				</div>
-				<div id="button-scheleton">
-					<a href="#">
-						<div class="hamburger">
-							<div class="hamburger-component"></div>
-							<div class="hamburger-component"></div>
-							<div class="hamburger-component"></div>
-						</div>
-					</a>
-				</div>
+				<div>
+					<h1>Welcome admin!</h1>
+					<p>Numero di articoli: </p>
+					<p>Numero di utenti del blog: </p>
+
+				</div>	
 			</div>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><a href="https://localhost:1337/">-> Torna alla pagina principale <-</a><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>
 		<%- include('footer.ejs')%>
 	</div>
+	<script type="text/javascript">
+		function openNav() {
+			document.getElementById('sidebar').style.width = "250px";
+		}
+		function closeNav(){
+			document.getElementById('sidebar').style.width = "0";
+		}
+		//Magari inserire un po' di statistiche visualizzate con grafici
+		/*document.body.onload = function(){
+			fetch('https://localhost:1337/api/numart')
+			.then((res) => {
+				console.log(res);
+			})
+		}*/
+	</script>
 
 </body>
 </html>

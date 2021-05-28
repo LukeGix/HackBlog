@@ -14,7 +14,6 @@
 				<h1 class="text-white text-center">Logo</h1>
 				<%- include('header.ejs')%>
 				<div class="container-fluid text-center">
-					<p>Writeup contents soon!</p>
 					<%var a = contents; %>
 					<%if(a !== undefined){%>
 						<% for(var i=0; i < a.length; i++){%>
@@ -27,8 +26,7 @@
 					<%}%>
 					
 					<%if(content !== undefined){%>
-							<div class="container-fluid text-white text-center">
-								<h1>Content of the file</h1>
+							<div class="container-fluid text-white">
 								<div class="container-fluid">
 									<%- content%>
 								</div>

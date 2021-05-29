@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blog</title>
+	<%- include('head.ejs')%>
+</head>
+<body>
+	<div class="mask">
+		<div class="container-fluid text-white">
+			<h1 class="text-white text-center">Logo</h1>
+				<%- include('header.ejs')%>
+				<div class="container-fluid text-center">
+					<!-- Link alle varie researches che prendo da MongoDb -->
+					<%let blogs = b;%>
+					<%for(let i=0; i < blogs.length; i++){%>
+						<a href="<%= 'https://localhost:1337/MyBlog/researches/'+ blogs[i].Title%>"><%- blogs[i].Title %></a>
+					<%}%>
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+				</div>	
+			
+		</div>
+
+
+
+		<%- include('footer.ejs')%>
+	</div>
+
+</body>
+</html>

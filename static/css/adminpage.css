@@ -1,0 +1,24 @@
+#sidebar {
+	width: 0;
+	height: 100%;
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
+	padding-top: 60px;
+	background-color: rgb(3,5,3);
+	transition: 0.5s;
+}
+
+#sidebar a {
+	padding: 8px 8px 8px 0px;
+	display: block;
+}
+
+#closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 20px;
+}

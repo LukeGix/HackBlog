@@ -1,0 +1,71 @@
+#logo {
+	width: 30%;
+	height: 30%;
+	margin: 0 auto;
+	top: 30px;
+	margin-top: 5px;
+}
+
+#testo {
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+p {
+	color: white;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#parent {
+
+}
+
+#main {
+	font-weight: bold;
+	font-size: 30px;
+}
+
+
+#rettangolo {
+	top: 0px;
+	left: 0px;
+	width: 100px;
+	height: 100px;
+	background-color: #333333;
+	border-radius: 3%;
+	z-index: 0;
+	margin: 0 auto;
+}
+
+#lineadown {
+	position: relative;
+	height: 5px;
+	width: 40%;
+	top: 30px;
+	left: 10px;
+	border-radius: 20%;
+	background-color: white;
+	transform: rotate(45deg);
+}
+
+#lineaup {
+	position: relative;
+	height: 5px;
+	width: 40%;
+	background-color: white;
+	top: 51px;
+	left: 10px;
+	transform: rotate(-45deg);
+	border-radius: 20%;
+}
+
+#barra {
+	position: relative;
+	width: 30px;
+	height: 5px;
+	background-color: white;
+	top: 60px;
+	left: 45px;
+	border-radius: 20%;
+}

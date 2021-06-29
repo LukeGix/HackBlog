@@ -7,13 +7,11 @@
 <body>
 	<div class="mask">
 		<div class="container-fluid text-white">
-			<h1 class="text-white text-center">Logo</h1>
+				<%- include('logo.ejs')%>
 				<%- include('header.ejs')%>
 				<div class="container-fluid text-center">
-					<p>This is My Blog</p>
-					<p>Here I'll post my reasearches in the IT Security field/CTF Writeups</p>
-					<a href="https://localhost:1337/MyBlog/git">Github writeups</a>
-					<a href="https://localhost:1337/MyBlog/researches">Researches</a>
+					<p class="testoo">Hi everyone! Welcome to my blog</p>
+					<p class="testoo">Here you can find a transposition of my <a href="https://localhost:1337/MyBlog/git">CTF writeups </a>on github and a collection of <a href="https://localhost:1337/MyBlog/researches">articles</a> on different topics of IT security</p>
 					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 				</div>	
 			
@@ -23,6 +21,11 @@
 
 		<%- include('footer.ejs')%>
 	</div>
+	<style type="text/css">
+		.testoo {
+			font-size: 20px;
+		}
+	</style>
 
 </body>
 </html>

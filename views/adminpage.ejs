@@ -2,6 +2,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="https://localhost:1337/adminpage.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<title>Welcome admin!</title>
 	<%- include('head.ejs')%>
 </head>
@@ -24,19 +25,16 @@
 				</div>	
 				<!-- End sidebar -->
 
-				<div>
-					<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Open</span>
+				<div align="left" class="container-fluid">
+					<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 				</div>
-				<div>
-					<h1>Welcome admin!</h1>
-					<p>Numero di articoli: </p>
-					<p>Numero di utenti del blog: </p>
-
-				</div>	
+				<div class="container-fluid"><h1>Welcome back admin</h1></div>
+	
+					
 			</div>
-			<br><br><br><br><br><br><a href="https://localhost:1337/">-> Torna alla pagina principale <-</a><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><a href="https://localhost:1337/">-> Torna alla pagina principale <-</a><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><a href="https://localhost:1337/logout">Logout</a>
 		</div>
-		<%- include('footer.ejs')%>
+		<!--L'admin page non ha bisogno di footer--> 
 	</div>
 	<script type="text/javascript">
 		function openNav() {
@@ -45,14 +43,8 @@
 		function closeNav(){
 			document.getElementById('sidebar').style.width = "0";
 		}
-		//Magari inserire un po' di statistiche visualizzate con grafici
-		/*document.body.onload = function(){
-			fetch('https://localhost:1337/api/numart')
-			.then((res) => {
-				console.log(res);
-			})
-		}*/
 	</script>
 
 </body>
 </html>
+

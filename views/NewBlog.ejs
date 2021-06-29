@@ -2,18 +2,43 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="https://localhost:1337/adminpage.css">
+	
 	<title>Welcome admin!</title>
 	<%- include('head.ejs')%>
 </head>
 <body>
 	<div class="mask">
 		<div class="container-fluid text-white">
+			<%- include('logo.ejs')%>
+			<br><br>
 			<div class="container-fluid text-center">
-				<p>TextArea soon!!</p>
+				<p>È una funzionalità ancora in fase di testing</p>
+				<br>
+				<p>Inserisci oggetto JSON da caricare</p>
+				<br>
+				<textarea id="editing"></textarea>
+				<br><br><button class="btn btn-primary" onclick="upload(document.getElementsByTagName('textarea')[0].value())">Done</button><button class="btn btn-primary" onclick="window.location = 'https://localhost:1337/Login';">Back</button>
+				<br><br><br><br><br><br><br><br><br>
 			</div>
 		</div>
-	</div>
 
-	<%- include('footer.ejs')%>
+
+		
+	</div>
+	<script type="text/javascript">
+		function upload(data){
+			fetch('https://localhost:1337/admin/newblog', {
+			  method: 'POST', //IL BACKEND SALVA I DATI IN UN NUOVO DOCUMENTO
+			  headers: {
+			    'Content-Type': 'application/json',
+			  },
+			  body: JSON.stringify(data),
+			})
+			.catch(error => {console.log(error)})
+		}
+	</script>
+	<link href="/newblog.css" rel="stylesheet" />
+
+	
 </body>
 </html>

@@ -18,14 +18,22 @@ let GetPass : Function = function f(callback : Function, params){
 		})
 }
 
+let RemoveCookie : Function = async function f(params){
+		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
+		let conn = await mongoose.connection;
+		let res = await Cookie.deleteOne({value: params});
+		console.log(res);
+		await conn.close();
+}
 
-let GetCookie : Function = function(callback : Function){
+
+let GetCookie : Function = function(callback : Function, params){
 		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 		let conn = mongoose.connection;
 		conn.once('open', () => {
-			Cookie.findOne({role:'admin'} , (err, data) =>{
+			Cookie.findOne({value: params} , (err, data) =>{
 				if(err) throw err;
-				callback(data.password);
+				callback(data);
 				conn.close();
 			})
 		})
@@ -70,6 +78,20 @@ let SetBlog : Function = function(params : object){
 	})
 }
 
+//DEVO RENDERLA ASYNC AWAIT
+let SetCookie : Function = function(params : object){
+	mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
+	let conn = mongoose.connection;
+	conn.once('open', () => {
+		let us = new Cookie(params);
+		us.save((err, doc, num) => {
+			if(err) throw err;
+			console.log('salvataggio effettuato con successo');
+			conn.close();
+		});
+	})
+}
+
 let SetUser : Function = function(params : object){
 	mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 	let conn = mongoose.connection;
@@ -88,5 +110,7 @@ export {
 	GetCookie as GCookie,
 	GetBlog as GBlog,
 	SetBlog as SBlog,
-	SetUser as SUser
+	SetUser as SUser,
+	RemoveCookie as RCookie,
+	SetCookie as SCookie
 }

@@ -9,19 +9,28 @@ const options : any = {
 	cert : fs.readFileSync('certs/server.crt'),
 	key : fs.readFileSync('certs/server.key')
 }
-let csp : string = ""; //Definisco la mia csp
+const allowMethods = ["GET", "POST"];
+//let csp : string = "default-src 'self' script-src 'self' style-src 'cdnjs.cloudflare.com'"; //Definisco la mia csp
 app.set('view engine', 'ejs');
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(obj.root + '/static/css'));
 app.use(express.static(obj.root + '/static/img'));
 app.use(express.static(obj.root + '/static/script'));
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
 	res.setHeader(
 		'Content-Security-Policy',
 		csp
 	);
 	next();
+})*/
+
+app.use((req, res, next) => {
+	if(!allowMethods.includes(req.method)){
+		res.status(405).send('Stop! You violated the law! ' + req.method);
+	}
+	next();
 })
+
 app.use('/', routes);
 
 

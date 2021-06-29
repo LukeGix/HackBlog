@@ -62,13 +62,14 @@ route.get('/git/:pr/:text', (req, res) =>{
 route.get('/researches', (req, res) => {
 	GBlog((rensp) => {
 		let blogs : object[] = rensp;
+		console.log(rensp);
 		res.render('researches', {b: blogs});
 	}, null)
 
 
 })
 
-//title è un input dell'utente!!!! --> CONTROLLALO
+//title è un input dell'utente!!!! --> CONTROLLALO --> regex a non finire
 route.get('/researches/:title', (req, res) => {
 	GBlog((rensp) => {
 		res.render('ResearchModel', {blog: rensp});

@@ -10,36 +10,56 @@ var tryAdmin = false;
 var route = express.Router();
 exports.loginroute = route;
 route.get('/', function (req, res) {
-    res.render('login');
+    if (req.headers.cookie !== undefined) {
+        //console.log(req.headers.cookie.split('=')[1]);
+        database_1.GCookie(function (data) {
+            console.log(data);
+            if (data !== null) {
+                console.log(data.value);
+                if (data.identity === 'admin') {
+                    res.render('adminpage');
+                }
+                else {
+                    res.render('login-success', { user: data.identity });
+                }
+            }
+            else {
+                res.render('login');
+            }
+        }, req.headers.cookie.split('=')[1]);
+    }
+    else {
+        res.render('login');
+    }
 });
 route.post('/', function (req, res) {
-    //GPASS --> cerca solo admin!!
     database_1.GPass(function (rensp) {
-        console.log(rensp);
-        console.log(req.body.user);
+        //console.log(rensp.name + ' ' + rensp.password);
         if (req.body.user === 'admin') {
             tryAdmin = true;
         }
         if (crypto_1.createHash('md5').update(req.body.password).digest('hex') === rensp.password) {
-            console.log('Success!');
             if (tryAdmin === true) {
+                //Devo dare i cookie di sessione --> COOKIE DA SISTEMARE
+                database_1.SCookie({ identity: 'admin', value: 'admin' });
                 res.cookie('SESSID', 'admin', {
-                    maxAge: 360000,
+                    maxAge: 24 * 60 * 60 * 1000,
                     httpOnly: true,
                     secure: true
                 });
                 res.render('adminpage');
-                //Devo dare i cookie di sessione
             }
             else {
-                res.cookie('SESSID', 'userNormale', {
-                    maxAge: 360000
+                database_1.SCookie({ identity: req.body.user, value: req.body.user });
+                res.cookie('SESSID', req.body.user, {
+                    maxAge: 24 * 60 * 60 * 1000,
+                    httpOnly: true,
+                    secure: true
                 });
                 res.render('login-success', { user: req.body.user }); //CONTROLLA L'INPUT
             }
         }
         else {
-            console.log('fail');
             res.render('fail');
         }
     }, { name: req.body.user, password: req.body.password }); //PERICOLOSA QUESTA COSA --> RICORDATI CTF HTB!!

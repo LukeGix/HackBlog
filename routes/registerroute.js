@@ -6,7 +6,6 @@ var crypto = require('crypto');
 var route = express.Router();
 exports.registerroute = route;
 var DatabaseUtils = require('../database');
-var bodyparser = require('body-parser');
 route.get('/', function (req, res) {
     res.render('register', { alarm: undefined });
 });

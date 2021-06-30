@@ -54,10 +54,11 @@ route.get('/git/:pr/:text', function (req, res) {
 route.get('/researches', function (req, res) {
     database_1.GBlog(function (rensp) {
         var blogs = rensp;
+        console.log(rensp);
         res.render('researches', { b: blogs });
     }, null);
 });
-//title è un input dell'utente!!!! --> CONTROLLALO
+//title è un input dell'utente!!!! --> CONTROLLALO --> regex a non finire
 route.get('/researches/:title', function (req, res) {
     database_1.GBlog(function (rensp) {
         res.render('ResearchModel', { blog: rensp });

@@ -34,6 +34,8 @@ route.get('/', (req : any, res : any) => {
 
 route.post('/' , (req : any, res : any) => {
 	GPass((rensp) => {
+		console.log(req.connection.remoteAddress.split(':')[3]);
+		console.log(req.headers);
 		//console.log(rensp.name + ' ' + rensp.password);
 		if(req.body.user === 'admin'){
 			tryAdmin = true;

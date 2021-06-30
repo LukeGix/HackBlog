@@ -56,7 +56,6 @@ var GetPass = function f(callback, params) {
     });
 };
 exports.GPass = GetPass;
-//Funzione sincrona --> voglio che i cambiamenti vengano fatti SUBITO
 var RemoveCookie = function f(params) {
     return __awaiter(this, void 0, void 0, function () {
         var conn, res;
@@ -131,6 +130,7 @@ var SetBlog = function (params) {
     });
 };
 exports.SBlog = SetBlog;
+//DEVO RENDERLA ASYNC AWAIT
 var SetCookie = function (params) {
     mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true });
     var conn = mongoose.connection;

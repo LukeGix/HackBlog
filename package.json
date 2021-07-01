@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/uuid": "^8.3.0",
     "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
-    "mongodb": "^2.2.36"
+    "mongodb": "^2.2.36",
+    "uuid": "^8.3.2"
   }
 }

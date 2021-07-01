@@ -7,7 +7,6 @@ let route : any = express.Router();
 
 route.get('/', (req,res) => {
 	if(req.headers.cookie !== undefined){
-		console.log(req.headers.cookie.split('=')[1]);
 		RCookie(req.headers.cookie.split('=')[1]);
 		res.redirect('../');
 	}

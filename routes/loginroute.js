@@ -4,6 +4,8 @@ exports.loginroute = void 0;
 var express = require("express");
 var database_1 = require("../database");
 var crypto_1 = require("crypto");
+var uuid_1 = require("uuid");
+var uuid = require("uuid");
 var cookieParser = require('cookie-parser');
 var json = '';
 var tryAdmin = false;
@@ -11,22 +13,26 @@ var route = express.Router();
 exports.loginroute = route;
 route.get('/', function (req, res) {
     if (req.headers.cookie !== undefined) {
-        //console.log(req.headers.cookie.split('=')[1]);
-        database_1.GCookie(function (data) {
-            console.log(data);
-            if (data !== null) {
-                console.log(data.value);
-                if (data.identity === 'admin') {
-                    res.render('adminpage');
+        console.log(uuid.validate(req.headers.cookie));
+        console.log(req.headers.cookie.split('=')[1]);
+        if (uuid.validate(req.headers.cookie.split('=')[1])) {
+            database_1.GCookie(function (data) {
+                if (data !== null) {
+                    if (data.identity.toString() === 'admin') {
+                        res.render('adminpage');
+                    }
+                    else {
+                        res.render('login-success', { user: data.identity.toString() });
+                    }
                 }
                 else {
-                    res.render('login-success', { user: data.identity });
+                    res.render('login');
                 }
-            }
-            else {
-                res.render('login');
-            }
-        }, req.headers.cookie.split('=')[1]);
+            }, req.headers.cookie.split('=')[1]);
+        }
+        else {
+            res.render('login');
+        }
     }
     else {
         res.render('login');
@@ -36,15 +42,14 @@ route.post('/', function (req, res) {
     database_1.GPass(function (rensp) {
         console.log(req.connection.remoteAddress.split(':')[3]);
         console.log(req.headers);
-        //console.log(rensp.name + ' ' + rensp.password);
-        if (req.body.user === 'admin') {
+        if (req.body.user.toString() === 'admin') {
             tryAdmin = true;
         }
         if (crypto_1.createHash('md5').update(req.body.password).digest('hex') === rensp.password) {
             if (tryAdmin === true) {
-                //Devo dare i cookie di sessione --> COOKIE DA SISTEMARE
-                database_1.SCookie({ identity: 'admin', value: 'admin' });
-                res.cookie('SESSID', 'admin', {
+                var cookie = uuid_1.v4();
+                database_1.SCookie({ identity: 'admin', value: cookie });
+                res.cookie('SESSID', cookie, {
                     maxAge: 24 * 60 * 60 * 1000,
                     httpOnly: true,
                     secure: true
@@ -52,17 +57,18 @@ route.post('/', function (req, res) {
                 res.render('adminpage');
             }
             else {
-                database_1.SCookie({ identity: req.body.user, value: req.body.user });
-                res.cookie('SESSID', req.body.user, {
+                var cookie = uuid_1.v4();
+                database_1.SCookie({ identity: req.body.user.toString(), value: cookie });
+                res.cookie('SESSID', cookie, {
                     maxAge: 24 * 60 * 60 * 1000,
                     httpOnly: true,
                     secure: true
                 });
-                res.render('login-success', { user: req.body.user }); //CONTROLLA L'INPUT
+                res.render('login-success', { user: req.body.user.toString() });
             }
         }
         else {
             res.render('fail');
         }
-    }, { name: req.body.user, password: req.body.password }); //PERICOLOSA QUESTA COSA --> RICORDATI CTF HTB!!
+    }, { name: req.body.user.toString(), password: req.body.password.toString() }); //Con il toString sono sicuro che non ci siano oggetti
 });

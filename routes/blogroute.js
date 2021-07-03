@@ -59,8 +59,8 @@ route.get('/researches', function (req, res) {
     }, null);
 });
 //title è un input dell'utente!!!! --> CONTROLLALO --> regex a non finire
-route.get('/researches/:title', function (req, res) {
+route.get('/researches/:id', function (req, res) {
     database_1.GBlog(function (rensp) {
         res.render('ResearchModel', { blog: rensp });
-    }, { Title: req.params.title });
+    }, { _id: req.params.id });
 });

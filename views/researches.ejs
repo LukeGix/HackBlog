@@ -3,6 +3,7 @@
 <head>
 	<title>Blog</title>
 	<%- include('head.ejs')%>
+	<link rel="stylesheet" type="text/css" href="https://localhost:1337/researches.css">
 </head>
 <body>
 	<div class="mask">
@@ -13,9 +14,24 @@
 					<!-- Link alle varie researches che prendo da MongoDb -->
 					<%let blogs = b;%>
 					<%for(let i=0; i < blogs.length; i++){%>
-						<a href="<%= 'https://localhost:1337/MyBlog/researches/'+ blogs[i].Title%>"><%- 'Title: ' + blogs[i].Title + ', Author: ' + blogs[i].Author %></a>
+						<!--Devo creare un div per ogni blog-->
+						<div class="blogcard container-fluid">
+							<div class="row">
+								<div class="col-md-6">
+									<img id="riempitivo" src="/Lele.jpg">
+								</div>
+								<div class="col-md-6">
+									<h1><%-blogs[i].Title%></h1>
+									<p><%- "Autore: " + ((blogs[i].Author === undefined) ? "Unknown" : blogs[i].Author) %></p>
+									<p><%- blogs[i].Body.split(',')[0] + "..." %></p>
+									<div class="container-fluid text-center" id="bottone">
+										<a href="<%= 'https://localhost:1337/MyBlog/researches/'+ blogs[i]._id %>">Read -></a>
+									</div>
+								</div>
+							</div>
+						</div>
 					<%}%>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+					<br><br><br><br><br><br><br><br><br>
 				</div>	
 			
 		</div>
@@ -27,3 +43,6 @@
 
 </body>
 </html>
+
+
+<!--<a href="<%= /*'https://localhost:1337/MyBlog/researches/'+ blogs[i].Title */%>"><%- /*'Title: ' + blogs[i].Title + ', Author: ' + blogs[i].Author */%></a>-->

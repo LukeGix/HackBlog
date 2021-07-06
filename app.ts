@@ -1,10 +1,10 @@
-import * as express from "express";
+let express = require('express');
 import {routes} from "./routes/routes";
 import * as bodyparser from 'body-parser';
 import * as https from 'https';
 import * as fs from 'fs';
 let obj : any = {root : '/home/luke/Scrivania/ProgettoProgWeb'}
-const app : express.Application = express();
+const app = express();
 const options : any = {
 	cert : fs.readFileSync('certs/server.crt'),
 	key : fs.readFileSync('certs/server.key')
@@ -12,7 +12,8 @@ const options : any = {
 const allowMethods = ["GET", "POST"];
 //let csp : string = "default-src 'self' script-src 'self' style-src 'cdnjs.cloudflare.com'"; //Definisco la mia csp
 app.set('view engine', 'ejs');
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json());
 app.use(express.static(obj.root + '/static/css'));
 app.use(express.static(obj.root + '/static/img'));
 app.use(express.static(obj.root + '/static/script'));

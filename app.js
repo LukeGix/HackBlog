@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-var express = require("express");
+var express = require('express');
 var routes_1 = require("./routes/routes");
 var bodyparser = require("body-parser");
 var https = require("https");
@@ -14,7 +14,8 @@ var options = {
 var allowMethods = ["GET", "POST"];
 //let csp : string = "default-src 'self' script-src 'self' style-src 'cdnjs.cloudflare.com'"; //Definisco la mia csp
 app.set('view engine', 'ejs');
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json());
 app.use(express.static(obj.root + '/static/css'));
 app.use(express.static(obj.root + '/static/img'));
 app.use(express.static(obj.root + '/static/script'));

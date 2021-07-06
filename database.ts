@@ -41,12 +41,13 @@ let GetCookie : Function = function(callback : Function, params){
 		
 }
 
-let GetBlog : Function = function(callback : Function, params){
+let GetBlog : Function = function(callback : Function, params : string){
 		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 		let conn = mongoose.connection;
 		conn.once('open', () => {
 			if(params !== null){
-				Blog.findOne(params , (err, data) =>{
+				Blog.findOne({'_id': params}, (err, data) =>{
+					if (err) throw err;
 					callback(data);
 					conn.close();
 				})
@@ -72,7 +73,6 @@ let SetBlog : Function = function(params : object){
 		let us = new Blog(params);
 		us.save((err, doc, num) => {
 			if(err) throw err;
-			console.log('salvataggio effettuato con successo');
 			conn.close();
 		});
 	})
@@ -105,6 +105,24 @@ let SetUser : Function = function(params : object){
 	})
 }
 
+
+let GetBlogCount : Function = async function(callback : Function){
+		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
+		let conn = await mongoose.connection;
+		let num = await Blog.countDocuments({});
+		conn.close();
+		return num
+}
+
+
+let GetSubCount : Function = async function(callback : Function){
+		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
+		let conn = await mongoose.connection;
+		let num = await User.countDocuments({});
+		conn.close();
+		return num
+}
+
 export {
 	GetPass as GPass,
 	GetCookie as GCookie,
@@ -112,5 +130,7 @@ export {
 	SetBlog as SBlog,
 	SetUser as SUser,
 	RemoveCookie as RCookie,
-	SetCookie as SCookie
+	SetCookie as SCookie,
+	GetBlogCount as GBlogCount,
+	GetSubCount as GSubCount
 }

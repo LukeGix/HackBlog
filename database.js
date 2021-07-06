@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.SCookie = exports.RCookie = exports.SUser = exports.SBlog = exports.GBlog = exports.GCookie = exports.GPass = void 0;
+exports.GSubCount = exports.GBlogCount = exports.SCookie = exports.RCookie = exports.SUser = exports.SBlog = exports.GBlog = exports.GCookie = exports.GPass = void 0;
 var User = require("./models/user");
 var Cookie = require("./models/cookie");
 var Blog = require("./models/blog");
@@ -97,7 +97,9 @@ var GetBlog = function (callback, params) {
     var conn = mongoose.connection;
     conn.once('open', function () {
         if (params !== null) {
-            Blog.findOne(params, function (err, data) {
+            Blog.findOne({ '_id': params }, function (err, data) {
+                if (err)
+                    throw err;
                 callback(data);
                 conn.close();
             });
@@ -124,7 +126,6 @@ var SetBlog = function (params) {
         us.save(function (err, doc, num) {
             if (err)
                 throw err;
-            console.log('salvataggio effettuato con successo');
             conn.close();
         });
     });
@@ -159,3 +160,43 @@ var SetUser = function (params) {
     });
 };
 exports.SUser = SetUser;
+var GetBlogCount = function (callback) {
+    return __awaiter(this, void 0, void 0, function () {
+        var conn, num;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true });
+                    return [4 /*yield*/, mongoose.connection];
+                case 1:
+                    conn = _a.sent();
+                    return [4 /*yield*/, Blog.countDocuments({})];
+                case 2:
+                    num = _a.sent();
+                    conn.close();
+                    return [2 /*return*/, num];
+            }
+        });
+    });
+};
+exports.GBlogCount = GetBlogCount;
+var GetSubCount = function (callback) {
+    return __awaiter(this, void 0, void 0, function () {
+        var conn, num;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true });
+                    return [4 /*yield*/, mongoose.connection];
+                case 1:
+                    conn = _a.sent();
+                    return [4 /*yield*/, User.countDocuments({})];
+                case 2:
+                    num = _a.sent();
+                    conn.close();
+                    return [2 /*return*/, num];
+            }
+        });
+    });
+};
+exports.GSubCount = GetSubCount;

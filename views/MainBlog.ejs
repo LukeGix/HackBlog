@@ -11,7 +11,7 @@
 				<%- include('header.ejs')%>
 				<div class="container-fluid text-center">
 					<p class="testoo">Hi everyone! Welcome to my blog</p>
-					<p class="testoo">Here you can find a transposition of my <a href="https://localhost:1337/MyBlog/git">CTF writeups </a>on github and a collection of <a href="https://localhost:1337/MyBlog/researches">articles</a> on different topics of IT security</p>
+					<p class="testoo">Here you can find a transposition of my <a href="/MyBlog/git">CTF writeups </a>on github and a collection of <a href="/MyBlog/researches">articles</a> on different topics of IT security</p>
 					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 				</div>	
 			
@@ -22,9 +22,12 @@
 		<%- include('footer.ejs')%>
 	</div>
 	<style type="text/css">
-		.testoo {
+		.testoo:nth-of-type(1) {
 			font-size: 20px;
+			margin-top: 30px;
 		}
+
+
 	</style>
 
 </body>

@@ -16,8 +16,15 @@
 				<br>
 				<p>Inserisci oggetto JSON da caricare</p>
 				<br>
-				<textarea id="editing"></textarea>
-				<br><br><button class="btn btn-primary" onclick="upload(document.getElementsByTagName('textarea')[0].value())">Done</button><button class="btn btn-primary" onclick="window.location = 'https://localhost:1337/Login';">Back</button>
+				<form action="/admin/newblog" method="POST">
+					<div><input type="text" name="Title" required="true" placeholder="Title"></div>
+					<div><input type="text" name="Author" required="true" placeholder="Author"></div>
+					<div><input type="text" name="Body" required="true" placeholder="Body"></div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+
+				<!--<textarea id="editing"></textarea>
+				<br><br><button class="btn btn-primary" onclick="upload(document.getElementsByTagName('textarea')[0].value)">Done</button><button class="btn btn-primary" onclick="window.location = 'https://localhost:1337/Login';">Back</button>-->
 				<br><br><br><br><br><br><br><br><br>
 			</div>
 		</div>
@@ -25,18 +32,6 @@
 
 		
 	</div>
-	<script type="text/javascript">
-		function upload(data){
-			fetch('https://localhost:1337/admin/newblog', {
-			  method: 'POST', //IL BACKEND SALVA I DATI IN UN NUOVO DOCUMENTO
-			  headers: {
-			    'Content-Type': 'application/json',
-			  },
-			  body: JSON.stringify(data),
-			})
-			.catch(error => {console.log(error)})
-		}
-	</script>
 	<link href="/newblog.css" rel="stylesheet" />
 
 	

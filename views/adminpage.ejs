@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="https://localhost:1337/adminpage.css">
+	<link rel="stylesheet" type="text/css" href="/adminpage.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<title>Welcome admin!</title>
 	<%- include('head.ejs')%>
@@ -18,9 +18,9 @@
 						</div>
 						<div id="elements" class="text-center">
 								<a href="javascript:void(0)" onclick="closeNav()" id="closebtn">&times;</a>
-								<a href="https://localhost:1337/admin/newblog">Create new article</a>
-								<a href="https://localhost:1337/">Back to home page</a>
-								<a href="https://localhost:1337/logout">Logout</a>
+								<a href="/admin/newblog">Create new article</a>
+								<a href="/">Back to home page</a>
+								<a href="/logout">Logout</a>
 						</div>
 					</div>
 				</div>	
@@ -32,9 +32,9 @@
 				<div class="container-fluid"><h1>Welcome back admin</h1></div>
 				<div id="stats" class="container-fluid ">
 					<div class="row">
-						<div class="center-card col-sm"><img class="img-card" src=x><h1>Del testo</h1></div>
-						<div class="center-card col-sm"><img class="img-card" src=x><h1>Del testo</h1></div>
-						<div class="center-card col-sm"><img class="img-card" src=x><h1>Del testo</h1></div>
+						<div class="center-card col-sm"><img class="img-card" src="/eye.PNG"><h2>Visitors: WIP</h2></div>
+						<div class="center-card col-sm"><img class="img-card" src="/user.PNG"><h2 id="sub">Subscribers: </h2></div>
+						<div class="center-card col-sm"><img class="img-card" src="/b.PNG"><h2 id="articles">Articles: </h2></div>
 					</div>
 				</div>
 	
@@ -51,6 +51,25 @@
 		function closeNav(){
 			document.getElementById('sidebar').style.width = "0";
 		}
+
+		fetch('https://192.168.1.58:1337/api/getcount/sub', {method: 'GET'})
+		.then((data) => {
+			return data.json();
+		})
+		.then((d) => {
+			document.getElementById('sub').innerHTML += JSON.parse(d).number;
+		})
+		.catch(err => console.log(err));
+
+		fetch('https://192.168.1.58:1337/api/getcount/articles', {method: 'GET'})
+		.then((data) => {
+			return data.json();
+		})
+		.then((d) => {
+			document.getElementById('articles').innerHTML += JSON.parse(d).number;
+		})
+		.catch(err => console.log(err));
+
 	</script>
 
 </body>

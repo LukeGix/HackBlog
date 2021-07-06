@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Github Writeups</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/git.css">
 	<%- include('head.ejs')%>
 	<%if(content !== undefined){%>
 		<link src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js
@@ -13,21 +15,23 @@
 			<div class="container-fluid text-white">
 				<%- include('logo.ejs')%>
 				<%- include('header.ejs')%>
-				<div class="container-fluid text-center">
+				<div class="container-fluid">
 					<%var a = contents; %>
 					<%if(a !== undefined){%>
+					<div class="container-fluid text-center">
 						<% for(var i=0; i < a.length; i++){%>
 							<%if(prefix !== undefined){%>
-								<a href = "<%= 'https://localhost:1337/MyBlog/git/'+prefix+'/'+a[i]%>" ><%- a[i]%></a><br>
+								<a href = "<%= '/MyBlog/git/'+prefix+'/'+a[i]%>" ><%- a[i]%></a><br>
 							<%}else{%>
-								<a href = "<%= 'https://localhost:1337/MyBlog/git/'+a[i]%>" ><%- a[i]%></a><br>
+								<a href = "<%= '/MyBlog/git/'+a[i]%>" ><%- a[i]%></a><br>
 							<%}%>
 						<%}%>
+					</div>
 					<%}%>
 					
 					<%if(content !== undefined){%>
 							<div class="container-fluid text-white">
-								<div class="container-fluid">
+								<div class="container-fluid ctfcontent">
 									<%- content%>
 								</div>
 							</div>

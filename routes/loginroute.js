@@ -13,8 +13,6 @@ var route = express.Router();
 exports.loginroute = route;
 route.get('/', function (req, res) {
     if (req.headers.cookie !== undefined) {
-        console.log(uuid.validate(req.headers.cookie));
-        console.log(req.headers.cookie.split('=')[1]);
         if (uuid.validate(req.headers.cookie.split('=')[1])) {
             database_1.GCookie(function (data) {
                 if (data !== null) {
@@ -40,8 +38,6 @@ route.get('/', function (req, res) {
 });
 route.post('/', function (req, res) {
     database_1.GPass(function (rensp) {
-        console.log(req.connection.remoteAddress.split(':')[3]);
-        console.log(req.headers);
         if (req.body.user.toString() === 'admin') {
             tryAdmin = true;
         }

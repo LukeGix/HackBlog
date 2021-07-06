@@ -45,22 +45,22 @@ route.get('/git/:pr/:text', function (req, res) {
     axios.get(URI)
         .then(function (rensp) {
         var html = converter.makeHtml(rensp.data);
+        html = html.replace(/<\s*em[^>]*>([\s\S]*[\w\W]*[\d\D]*)<\s*\/\s*em>|<\s*\/\s*em>|<em>/gi, "$1");
+        html = html.replace(/<\s*em[^>]*>([\s\S]*[\w\W]*[\d\D]*)<\s*\/\s*em>|<\s*\/\s*em>|<em>/gi, "$1");
         res.render('githubwriteups', { contents: undefined, content: html, prefix: undefined });
     })["catch"](function (err) {
         console.log(err);
     });
-    //DA SISTEMARE
 });
 route.get('/researches', function (req, res) {
     database_1.GBlog(function (rensp) {
         var blogs = rensp;
-        console.log(rensp);
         res.render('researches', { b: blogs });
     }, null);
 });
-//title è un input dell'utente!!!! --> CONTROLLALO --> regex a non finire
 route.get('/researches/:id', function (req, res) {
     database_1.GBlog(function (rensp) {
+        rensp.Body = rensp.Body.replace("\\", "");
         res.render('ResearchModel', { blog: rensp });
-    }, { _id: req.params.id });
+    }, req.params.id.toString());
 });

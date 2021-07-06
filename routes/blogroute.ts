@@ -48,14 +48,13 @@ route.get('/git/:pr/:text', (req, res) =>{
 	axios.get(URI)
 	.then((rensp) => {
 		let html = converter.makeHtml(rensp.data);
+		html = html.replace(/<\s*em[^>]*>([\s\S]*[\w\W]*[\d\D]*)<\s*\/\s*em>|<\s*\/\s*em>|<em>/gi, "$1");
+		html = html.replace(/<\s*em[^>]*>([\s\S]*[\w\W]*[\d\D]*)<\s*\/\s*em>|<\s*\/\s*em>|<em>/gi, "$1");
 		res.render('githubwriteups', {contents: undefined, content: html, prefix: undefined});
 	})
 	.catch(err => {
 		console.log(err);
 	})
-	
-	//DA SISTEMARE
-
 	
 })
 
@@ -68,11 +67,11 @@ route.get('/researches', (req, res) => {
 
 })
 
-//title è un input dell'utente!!!! --> CONTROLLALO --> regex a non finire
 route.get('/researches/:id', (req, res) => {
 	GBlog((rensp) => {
+		rensp.Body = rensp.Body.replace("\\", "");
 		res.render('ResearchModel', {blog: rensp});
-	}, {_id: req.params.id})
+	}, req.params.id.toString())
 
 
 })

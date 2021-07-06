@@ -19,3 +19,10 @@ route.get('/getcount/sub', function (req, res) {
         res.end();
     });
 });
+route.get('/getcount/visitors', function (req, res) {
+    database_1.GVisitorCount(function (data) {
+        var risposta = { number: data };
+        res.json(JSON.stringify(risposta));
+        res.end();
+    });
+});

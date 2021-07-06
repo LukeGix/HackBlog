@@ -36,10 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.GSubCount = exports.GBlogCount = exports.SCookie = exports.RCookie = exports.SUser = exports.SBlog = exports.GBlog = exports.GCookie = exports.GPass = void 0;
+exports.IVisitorCount = exports.GVisitorCount = exports.GSubCount = exports.GBlogCount = exports.SCookie = exports.RCookie = exports.SUser = exports.SBlog = exports.GBlog = exports.GCookie = exports.GPass = void 0;
 var User = require("./models/user");
 var Cookie = require("./models/cookie");
 var Blog = require("./models/blog");
+var Visitor = require("./models/visitor");
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var dburi = "mongodb://localhost:27017/LocalApp";
@@ -69,7 +70,6 @@ var RemoveCookie = function f(params) {
                     return [4 /*yield*/, Cookie.deleteOne({ value: params })];
                 case 2:
                     res = _a.sent();
-                    console.log(res);
                     return [4 /*yield*/, conn.close()];
                 case 3:
                     _a.sent();
@@ -140,7 +140,6 @@ var SetCookie = function (params) {
         us.save(function (err, doc, num) {
             if (err)
                 throw err;
-            console.log('salvataggio effettuato con successo');
             conn.close();
         });
     });
@@ -154,13 +153,12 @@ var SetUser = function (params) {
         us.save(function (err, doc, num) {
             if (err)
                 throw err;
-            console.log('salvataggio effettuato con successo');
             conn.close();
         });
     });
 };
 exports.SUser = SetUser;
-var GetBlogCount = function (callback) {
+var GetBlogCount = function () {
     return __awaiter(this, void 0, void 0, function () {
         var conn, num;
         return __generator(this, function (_a) {
@@ -180,7 +178,7 @@ var GetBlogCount = function (callback) {
     });
 };
 exports.GBlogCount = GetBlogCount;
-var GetSubCount = function (callback) {
+var GetSubCount = function () {
     return __awaiter(this, void 0, void 0, function () {
         var conn, num;
         return __generator(this, function (_a) {
@@ -200,3 +198,28 @@ var GetSubCount = function (callback) {
     });
 };
 exports.GSubCount = GetSubCount;
+var GetVisitorCount = function (callback) {
+    mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true });
+    var conn = mongoose.connection;
+    conn.once('open', function () {
+        Visitor.findOne({ name: 'counter' }, function (err, data) {
+            if (err)
+                throw err;
+            callback(data.value);
+            conn.close();
+        });
+    });
+};
+exports.GVisitorCount = GetVisitorCount;
+var IncrementVisitorCount = function () {
+    mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true });
+    var conn = mongoose.connection;
+    conn.once('open', function () {
+        Visitor.findOneAndUpdate({ name: "counter" }, { $inc: { value: 1 } }, function (err, data) {
+            if (err)
+                throw err;
+            conn.close();
+        });
+    });
+};
+exports.IVisitorCount = IncrementVisitorCount;

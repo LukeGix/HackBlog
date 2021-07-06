@@ -1,6 +1,7 @@
 import * as User from './models/user';
 import * as Cookie from './models/cookie';
 import * as Blog from './models/blog';
+import * as Visitor from './models/visitor';
 let mongoose = require('mongoose');
 let crypto = require('crypto');
 
@@ -22,7 +23,6 @@ let RemoveCookie : Function = async function f(params){
 		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 		let conn = await mongoose.connection;
 		let res = await Cookie.deleteOne({value: params});
-		console.log(res);
 		await conn.close();
 }
 
@@ -86,7 +86,6 @@ let SetCookie : Function = function(params : object){
 		let us = new Cookie(params);
 		us.save((err, doc, num) => {
 			if(err) throw err;
-			console.log('salvataggio effettuato con successo');
 			conn.close();
 		});
 	})
@@ -99,14 +98,13 @@ let SetUser : Function = function(params : object){
 		let us = new User(params);
 		us.save((err, doc, num) => {
 			if(err) throw err;
-			console.log('salvataggio effettuato con successo');
 			conn.close();
 		});
 	})
 }
 
 
-let GetBlogCount : Function = async function(callback : Function){
+let GetBlogCount : Function = async function(){
 		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 		let conn = await mongoose.connection;
 		let num = await Blog.countDocuments({});
@@ -115,12 +113,37 @@ let GetBlogCount : Function = async function(callback : Function){
 }
 
 
-let GetSubCount : Function = async function(callback : Function){
+let GetSubCount : Function = async function(){
 		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 		let conn = await mongoose.connection;
 		let num = await User.countDocuments({});
 		conn.close();
 		return num
+}
+
+let GetVisitorCount : Function = function(callback : Function){
+		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
+		let conn = mongoose.connection;
+		conn.once('open', () => {
+			Visitor.findOne({name: 'counter'} , (err, data) => {
+				if(err) throw err;
+				callback(data.value);
+				conn.close();
+			})
+		})
+
+
+}
+
+let IncrementVisitorCount : Function = function(){
+		mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
+		let conn = mongoose.connection;
+		conn.once('open', () => {
+			Visitor.findOneAndUpdate({name: "counter"}, { $inc: { value: 1 }} , (err, data) => {
+				if (err) throw err;
+				conn.close();
+			})
+		})
 }
 
 export {
@@ -132,5 +155,7 @@ export {
 	RemoveCookie as RCookie,
 	SetCookie as SCookie,
 	GetBlogCount as GBlogCount,
-	GetSubCount as GSubCount
+	GetSubCount as GSubCount,
+	GetVisitorCount as GVisitorCount,
+	IncrementVisitorCount as IVisitorCount
 }

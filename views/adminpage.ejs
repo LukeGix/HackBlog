@@ -31,8 +31,9 @@
 				</div>
 				<div class="container-fluid"><h1>Welcome back admin</h1></div>
 				<div id="stats" class="container-fluid ">
+					<h1>Website analytics (provided by a rudimental analytics engine<sup>TM</sup>)</h1>
 					<div class="row">
-						<div class="center-card col-sm"><img class="img-card" src="/eye.PNG"><h2>Visitors: WIP</h2></div>
+						<div class="center-card col-sm"><img class="img-card" src="/eye.PNG"><h2 id="visitors">Visitors: </h2></div>
 						<div class="center-card col-sm"><img class="img-card" src="/user.PNG"><h2 id="sub">Subscribers: </h2></div>
 						<div class="center-card col-sm"><img class="img-card" src="/b.PNG"><h2 id="articles">Articles: </h2></div>
 					</div>
@@ -58,6 +59,15 @@
 		})
 		.then((d) => {
 			document.getElementById('sub').innerHTML += JSON.parse(d).number;
+		})
+		.catch(err => console.log(err));
+
+		fetch('https://192.168.1.58:1337/api/getcount/visitors', {method: 'GET'})
+		.then((data) => {
+			return data.json();
+		})
+		.then((d) => {
+			document.getElementById('visitors').innerHTML += JSON.parse(d).number;
 		})
 		.catch(err => console.log(err));
 

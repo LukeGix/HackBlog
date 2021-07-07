@@ -1,36 +1,48 @@
 .blogcard {
-	width: 950px;
 	margin-bottom: 20px;
 	margin-top: 20px;
+	margin-left: 0;
+	margin-right: 0;
 	border-radius: 4px;
-	background-color: blue;
-	max-height: 500px;
-}
-
-.blogcard div {
-	max-height: 400px;
-}
-
-.blogcard a {
-	color: red;
-}
-
-#bottone {
-	margin-top: 50px;
-	margin-bottom: 100px;
-	width: 30%;
-	height: 60px;
-	background-color: white;
 	border-style: solid;
-	border-width: 5px;
-	border-color: red;
 }
+
+
+.blogcard a:hover {
+	color: white;
+}
+
 
 #riempitivo {
 	margin-top: 20px;
-	max-height: 400px;
 	margin-bottom: 20px;
-	width: 400px;
+	width: 800px;
+	height: 500px;
 	overflow: hidden;
 	border-radius: 4px;
+}
+
+#titolo {
+	margin-top: 20px;
+}
+
+.blogcard p {
+	font-size: 25px;
+}
+
+button {
+	margin-top: 100px;
+	width: 50%;
+	height: 70px;
+}
+
+button a {
+	font-size: 25px;
+}
+
+#img {
+}
+
+#sinossi {
+
 }

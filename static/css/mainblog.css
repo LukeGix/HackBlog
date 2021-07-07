@@ -1,0 +1,16 @@
+.row .card {
+	border-radius: 2px;
+	position: relative;
+	top: 30px;
+	background-color: red;
+	padding: 0;
+	width: 48%;
+}
+
+#one {
+	margin-right: 10px;
+}
+
+#two {
+	margin-left: 10px;
+}

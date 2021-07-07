@@ -1,8 +1,10 @@
+<!-- DA CANCELLARE -->
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Blog</title>
 	<%- include('head.ejs')%>
+	<link rel="stylesheet" type="text/css" href="/mainblog.css">
 </head>
 <body>
 	<div class="mask">
@@ -11,7 +13,23 @@
 				<%- include('header.ejs')%>
 				<div class="container-fluid text-center">
 					<p class="testoo">Hi everyone! Welcome to my blog</p>
-					<p class="testoo">Here you can find a transposition of my <a href="/MyBlog/git">CTF writeups </a>on github and a collection of <a href="/MyBlog/researches">articles</a> on different topics of IT security</p>
+					<div class="row container-fluid">
+						<div id="one" class="col-xs-6 card">
+							<div><img src="x"></div>
+							<div><p>CTF writeups</p></div>
+						</div>
+						<div id="two" class="col-xs-6 card">
+							<div><img src="x"></div>
+							<div><p>Articles</p></div>
+						</div>
+
+					</div>
+
+
+
+
+
+
 					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 				</div>	
 			

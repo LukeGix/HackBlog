@@ -15,20 +15,24 @@
 			<div class="container-fluid text-white">
 				<%- include('logo.ejs')%>
 				<%- include('header.ejs')%>
-				<div class="container-fluid">
+				<div id="maincont" class="container-fluid">
 					<%var a = contents; %>
 					<%if(a !== undefined){%>
-					<div class="container-fluid text-center">
-						<% for(var i=0; i < a.length; i++){%>
-							<%if(prefix !== undefined){%>
-								<a href = "<%= '/MyBlog/git/'+prefix+'/'+a[i]%>" ><%- a[i]%></a><br>
-							<%}else{%>
-								<a href = "<%= '/MyBlog/git/'+a[i]%>" ><%- a[i]%></a><br>
+					<div id="supercont" style="height: <%- 50* a.length + 'px'%>">
+						<div id="separatore" style="animation-name: long; animation-duration: 3s; animation-fill-mode: forwards;"></div>
+						<div class="container-fluid" id="cont">
+							<% for(var i=0; i < a.length; i++){%>
+								<%if(prefix !== undefined){%>
+									<a href = "<%= '/MyBlog/git/'+prefix+'/'+a[i]%>" ><%- a[i]%></a><br><br>
+								<%}else{%>
+									<%if(a[i] !== undefined){%>
+										<a href = "<%= '/MyBlog/git/'+a[i]%>" ><%- a[i]%></a><br><br>
+									<%}%>
+								<%}%>
 							<%}%>
+						</div>
 						<%}%>
 					</div>
-					<%}%>
-					
 					<%if(content !== undefined){%>
 							<div class="container-fluid text-white">
 								<div class="container-fluid ctfcontent">
@@ -37,10 +41,18 @@
 							</div>
 						<%}%>	
 					
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-				</div>	
+				</div>
+				<%- include('footer.ejs')%>	
 			</div>
-		<%- include('footer.ejs')%>
+		
 	</div>
+
+	<style>
+		@keyframes long {
+			from {height: 0px;}
+			to {height: <%- 50* ((a !== undefined) ? (a.length +1) :  1) + 'px'%>}
+		}
+
+	</style>
 </body>
 </html>

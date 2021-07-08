@@ -3,7 +3,6 @@ body{
 	background-size: cover;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
-	/*font-family: 'New Tegomin', sans-serif;*/
 	font-size: 20px;
 }
 
@@ -11,14 +10,10 @@ body{
 	background-color: rgba(0, 0, 0, 0.8); position: relative; height: 100%; overflow: unset; padding-top: 5px;
 }
 
-#navigation {
-	/*font-family: 'Shadows Into Light', cursive; font-size:30px;*/
-}
 
 
 #blog {
 	margin-top: 100px;
-	/*background-color: whitesmoke;*/
 	width: 100%;
 	height: 550px;
 	margin-bottom: 100px;
@@ -29,8 +24,6 @@ body{
 	width: auto;
 	padding: 0px;
 	transition: transform 1s;
-	/*border-color: white;*/
-	/*border-style: solid;*/
 	border-radius: 10px;
 
 }
@@ -55,7 +48,6 @@ body{
 
 .b {
 	position: relative;
-	/*bottom: -60%;*/
 }
 
 #titolo {
@@ -72,7 +64,7 @@ body{
 }
 
 #projects {
-	margin-bottom: 300px;
+	margin-bottom: 100px;
 }
 
 .explanation {
@@ -85,7 +77,7 @@ body{
 }
 
 footer {
-	margin-top: 370px;
+	margin-top: 30px;
 	padding-bottom: 20px;
 }
 

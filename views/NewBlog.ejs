@@ -12,20 +12,15 @@
 			<%- include('logo.ejs')%>
 			<br><br>
 			<div class="container-fluid text-center">
-				<p>È una funzionalità ancora in fase di testing</p>
-				<br>
-				<p>Inserisci oggetto JSON da caricare</p>
-				<br>
-				<form action="/admin/newblog" method="POST">
+				<p>Fill the form below and submit it to create a new article</p>
+				<form id="newblog" action="/admin/newblog" method="POST">
 					<div><input type="text" name="Title" required="true" placeholder="Title" autocomplete="off"></div>
 					<div><input type="text" name="Author" required="true" placeholder="Author" autocomplete="off"></div>
-					<div><input type="text" name="Body" required="true" placeholder="Body" autocomplete="off"></div>
+					<div><textarea form="newblog" placeholder="Body" name="Body"></textarea></div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 
-				<!--<textarea id="editing"></textarea>
-				<br><br><button class="btn btn-primary" onclick="upload(document.getElementsByTagName('textarea')[0].value)">Done</button><button class="btn btn-primary" onclick="window.location = 'https://localhost:1337/Login';">Back</button>-->
-				<br><br><br><br><br><br><br><br><br>
+
 			</div>
 		</div>
 

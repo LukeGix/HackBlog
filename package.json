@@ -1,0 +1,19 @@
+{
+  "name": "ProgettoProgWeb",
+  "version": "1.0.0",
+  "description": "A blog",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cookie-parser": "^1.4.5",
+    "mongodb": "^2.2.36",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "run": "tsc app.ts controllers/*.ts && node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

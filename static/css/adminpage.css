@@ -1,0 +1,49 @@
+#sidebar {
+	width: 0;
+	height: 100%;
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
+	padding-top: 60px;
+	background-color: rgb(3,5,3);
+	transition: 0.5s;
+}
+
+#sidebar a {
+	padding: 8px 8px 8px 0px;
+	display: block;
+}
+
+#closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 20px;
+}
+
+#stats {
+	position: relative;
+	top: 200px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	width: 80%;
+	border-radius: 2px;
+	background-color: #333333;
+}
+
+#center-card {
+	width: 33%;
+	height: 50%;
+	max-height: 550px;
+}
+
+.img-card {
+	max-width: 33%;
+}
+
+img {
+	border-radius: 2px;
+	position: relative;
+	top: 5px;
+}

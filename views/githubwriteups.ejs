@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Github Writeups</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/git.css">
+	<%- include('head.ejs')%>
+	<%if(content !== undefined){%>
+		<link src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js
+" type="text/javascript" />
+	<%}%>
+</head>
+<body>
+	<div class="mask">
+			<div class="container-fluid text-white">
+				<%- include('logo.ejs')%>
+				<%- include('header.ejs')%>
+				<div id="maincont" class="container-fluid">
+					<%if(number !== undefined && number !== 0){%>
+						<div id="explanation">
+							<p>CTF (Capture The Flag) are Hacking competition where you have to complete a series of challenges. The objective of each challenge is to grab the "flag", a string of letters and numbers that proves others you were able to solve a particular task.
+							<br>There are different categories of challenges:<br>
+								<div class="row">
+									<div class="col-sm-6">
+										<ul>
+											<li>Reversing</li>
+											<li>Crypto</li>
+											<li>Web</li>
+											<li>Programming</li>
+										</ul>
+									</div>
+									<div class="col-sm-6">
+										<a href="https://www.ctftime.org"><img src="/CTF_IMG.jpg"></a>
+									</div>
+								</div>
+								And so on. Here there is the list of all the solutions of some challenges that I did in different CTFs.
+							</p>
+						</div>
+
+						<div id="supercont" class="text-center">
+							<div class="container-fluid text-center" id="cont">
+								
+									<%for(let i=0; i< number; i++){%>
+										<div class="btn-group">
+										  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuClickable<%= i %>" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+										  </button>
+										  <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickable">
+										  </ul>
+										</div>
+									<%}%>
+
+								
+										
+							</div>
+						</div>
+					<%}%>
+
+					
+					
+					<%if(content !== undefined){%>
+							<div class="container-fluid text-white">
+								<div class="container-fluid ctfcontent">
+									<%- content%>
+								</div>
+							</div>
+						<%}%>	
+					
+				</div>
+				<%- include('footer.ejs')%>	
+			</div>
+		
+	</div>
+	<%if(content === undefined){%>
+		<script>
+			/*IT WORKS*/
+			let nomi = [];
+			fetch('https://api.github.com/repos/LukeGix/CTF-Writeups/contents/')
+			.then(data => data.json())
+			.then(data => {
+				//Imposto i nomi dei dropdown item con i nomi delle cartelle
+				for(let i=0, j=0; i < data.length, j < 3; i++, j++){
+					if(data[i].name === "README.md"){
+						j--;
+					}else{
+						nomi.push(data[i].name);
+						document.getElementById('dropdownMenuClickable' + j).innerHTML = data[i].name;
+					}
+				}
+
+
+
+
+				for(let i=0; i < nomi.length; i++){
+					fetch('https://api.github.com/repos/LukeGix/CTF-Writeups/contents/' + nomi[i])
+					.then(data => data.json())
+					.then(data => {
+						for(let j=0; j < data.length; j++){
+							let parent = document.createElement("li");
+							let child = document.createElement("a");
+							child.innerHTML = data[j].name;
+							child.classList.add('dropdown-item');
+							child.href = "/blog/git/" + nomi[i] + "/" + data[j].name;
+							parent.appendChild(child);
+							document.getElementsByClassName('dropdown-menu')[i].appendChild(parent);
+						}
+					})
+					.catch(err => console.log(err));
+				}
+
+			})
+			.catch(err => console.log(err));
+			/* IT WORKS */
+
+		</script>
+
+	<%}%>
+</body>
+</html>

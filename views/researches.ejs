@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blog</title>
+	<%- include('head.ejs')%>
+	<link rel="stylesheet" type="text/css" href="/researches.css">
+</head>
+<body>
+	<div class="mask">
+		<div class="container-fluid text-white">
+				<%- include('logo.ejs')%>
+				<%- include('header.ejs')%>
+				<div class="container-fluid text-center">
+					<!-- Link alle varie researches che prendo da MongoDb -->
+					<%let blogs = b;%>
+					<%for(let j = (blogs.length-1); j >= 0; j--){%>
+						<!--Devo creare un div per ogni blog-->
+						<div class="blogcard container-fluid">
+							<div class="row">
+								<div id="img" class="col-md-6">
+									<img id="riempitivo" src="/Lele.jpg">
+								</div>
+								<div id="sinossi" class="col-md-6">
+									<h1 id="titolo"><%-blogs[j].Title%></h1>
+									<p><%- "Author: " + ((blogs[j].Author === undefined) ? "Unknown" : blogs[j].Author) %></p>
+									<p><%- blogs[j]._id.getTimestamp().getDate() + "/" + blogs[j]._id.getTimestamp().getMonth() + "/" + blogs[j]._id.getTimestamp().getFullYear() %></p>
+									<p><%- blogs[j].Body.split('.')[0] + "..." %></p>
+									<button class="btn btn-primary">
+										<a href="<%= '/blog/researches/'+ blogs[j]._id %>">Read more</a>
+									</button>
+								</div>
+							</div>
+						</div>
+					<%}%>
+					<br><br><br><br><br><br><br><br><br>
+				</div>	
+			
+		</div>
+
+
+
+		<%- include('footer.ejs')%>
+	</div>
+
+</body>
+</html>

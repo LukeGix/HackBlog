@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Luke's Adventures</title>
+	<meta charset="utf-8">
+		<!-- Font Awesome -->
+	<%- include('head.ejs')%>
+</head>
+<body>
+		<div class="mask">
+			<div class="container-fluid text-white">
+				<%- include('logo.ejs')%>
+				<%- include('header.ejs')%>
+				<div class="container-fluid">
+
+		
+					
+					<!-- Main content -->
+					<div class="container-fluid">
+
+						
+						
+						<!-- Recent projects section -->
+						<div class="container-fluid text-center" id="projects">
+							<h2 class="text-center text-white">Recent Projects / To-do list</h2>
+							<p class="text-white text-center"><a href="#" target="_blank">ThanOS</a> - Simple Handcrafted OS built following Viktor Engelmann's wyoos project (with @damned-me)</p>
+							<p class="text-white text-center">Reading <a href="#" target="_blank"><i>Understanding the linux kernel</i></a> - Trying to read and fully understand one of the best books about Linux Kernel</p>
+							<p class="text-white text-center"><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank">OSTEP</a> - Reading <i>Operating System: Three Easy Pieces</i></p>
+						</div>
+						<!-- END RECENT PROJECTS SECTIONS -->
+
+
+
+
+
+
+						<!-- About me section -->
+						<div class="container-fluid" id="whoami">
+							<div class="row">
+								<div class="col">
+									<img src="https://i.pinimg.com/originals/60/42/0c/60420ce7a024856eb63c1962687ef39a.jpg" style="float: left; width: 90%; height: auto;" />
+								</div>
+								<div class="col" style="float: right;">
+									<h2 class="text-white text-center p-3">$_Whoami</h2>
+									<p class="text-white text-center"><%- biotext%></p>
+								</div>
+							</div>
+						</div>
+						<!-- END ABOUT ME SECTION -->
+
+
+					</div>
+
+					<!-- Blog section -->
+					<div id="blog">
+						<div id="titolo" class="container-fluid text-center">
+							<h1>Blog</h1>
+							<p>Here you can find some articles I've posted about different topics of IT security, as well as a transposition of my CTF writeups.
+							</p>
+						</div>
+						<div class="row">
+							<div id="card1" class="col-md text-center"><div class="text-center explanation"><p>CTF writeups</p></div><button class="b btn btn-primary"><a href="/blog/git">Go to CTF writeups</a></button></div>
+							<div id="card2" class="col-md text-center"><div class="text-center explanation"><p>Articles</p></div><button class="b btn btn-primary"><a href="/blog/researches">Go to Articles</a></button></div>
+						</div>
+					</div>
+
+
+					
+				</div>
+			</div>
+
+			
+			
+
+
+			<%- include('footer.ejs')%>
+			
+
+		</div>
+
+
+</body>
+</html>

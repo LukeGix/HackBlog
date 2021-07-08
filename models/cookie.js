@@ -2,11 +2,11 @@ mongoose = require('mongoose');
 Schema = mongoose.Schema;
 
 const CookieSchema = new Schema({
-	role: {
+	identity: {
 		type: String,
 		required: true
 	},
-
+	
 	value: {
 		type: String,
 		required: true

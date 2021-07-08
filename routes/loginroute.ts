@@ -1,24 +1,11 @@
 import * as express from "express"
-import * as fs from 'fs';
-import {GPass , GCookie, GBlog} from '../database';
-import {createHash} from 'crypto';
-let json : string = '';
+
+let login_controller = require('../controllers/logincontroller');
+
 let route : any = express.Router();
 
-route.get('/', (req : any, res : any) => {
-	res.render('login');
-})
+route.get('/', login_controller.index);
 
-route.post('/' , (req : any, res : any) => {
-	GPass((rensp) => {
-		console.log(rensp);
-		if(createHash('md5').update(req.body.password).digest('hex') === rensp.password){
-			console.log('Success!');
-		}else{
-			console.log('fail');
-		}
-
-	});
-})
+route.post('/' , login_controller.login);
 
 export {route as loginroute};

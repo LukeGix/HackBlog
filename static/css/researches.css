@@ -1,0 +1,48 @@
+.blogcard {
+	margin-bottom: 20px;
+	margin-top: 20px;
+	margin-left: 0;
+	margin-right: 0;
+	border-radius: 4px;
+	border-style: solid;
+}
+
+
+.blogcard a:hover {
+	color: white;
+}
+
+
+#riempitivo {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 800px;
+	height: 500px;
+	overflow: hidden;
+	border-radius: 4px;
+}
+
+#titolo {
+	margin-top: 20px;
+}
+
+.blogcard p {
+	font-size: 25px;
+}
+
+button {
+	margin-top: 100px;
+	width: 50%;
+	height: 70px;
+}
+
+button a {
+	font-size: 25px;
+}
+
+#img {
+}
+
+#sinossi {
+
+}

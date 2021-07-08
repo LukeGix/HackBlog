@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<%- include('head.ejs')%>
+</head>
+<body>
+	<div class="mask">
+		<div class="container-fluid text-white">
+			
+			<div class="container-fluid text-center">
+				<h1>Mossa saggia soldato</h1>
+				<form action="/Register" method="POST">
+					<p>Nome: </p><input type="text" name="name" required="true">
+					<p>Username: </p><input type="text" name="user" required="true">
+					<p>Password: </p><input type="password" name="passwd">
+					<button>Registrati</button>
+				</form>
+				
+			</div>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</div>
+		<%- include('footer.ejs')%>
+	</div>
+
+	<%if(alarm === true){%>
+		<script>alert('Registrazione avvenuta con successo')</script>
+	<%}%>
+</body>
+</html>

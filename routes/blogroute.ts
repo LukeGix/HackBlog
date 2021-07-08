@@ -1,22 +1,15 @@
 import * as express from "express"
+let blog_controller = require('../controllers/blogcontroller');
 
 let route : any = express.Router();
 
 
-route.get('/', (req : any, res: any) => {
-	res.write("Blog!");
-	res.end();
-})
+route.get('/git', blog_controller.getGit);
 
+route.get('/git/:pr/:text', blog_controller.getGitContents);
 
-route.get('/all', (req : any, res: any) => {
-	res.write("All!");
-	res.end();
-})
+route.get('/researches', blog_controller.getArticleMain);
 
+route.get('/researches/:id', blog_controller.getArticles);
 
-route.get('/git', (req : any, res: any) => {
-	res.write("Git!");
-	res.end();
-})
 export {route as blogroute};

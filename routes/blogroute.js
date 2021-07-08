@@ -2,17 +2,10 @@
 exports.__esModule = true;
 exports.blogroute = void 0;
 var express = require("express");
+var blog_controller = require('../controllers/blogcontroller');
 var route = express.Router();
 exports.blogroute = route;
-route.get('/', function (req, res) {
-    res.write("Blog!");
-    res.end();
-});
-route.get('/all', function (req, res) {
-    res.write("All!");
-    res.end();
-});
-route.get('/git', function (req, res) {
-    res.write("Git!");
-    res.end();
-});
+route.get('/git', blog_controller.getGit);
+route.get('/git/:pr/:text', blog_controller.getGitContents);
+route.get('/researches', blog_controller.getArticleMain);
+route.get('/researches/:id', blog_controller.getArticles);

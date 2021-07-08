@@ -131,7 +131,6 @@ var SetBlog = function (params) {
     });
 };
 exports.SBlog = SetBlog;
-//DEVO RENDERLA ASYNC AWAIT
 var SetCookie = function (params) {
     mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true });
     var conn = mongoose.connection;

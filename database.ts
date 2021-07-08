@@ -78,7 +78,6 @@ let SetBlog : Function = function(params : object){
 	})
 }
 
-//DEVO RENDERLA ASYNC AWAIT
 let SetCookie : Function = function(params : object){
 	mongoose.connect(dburi, {useNewUrlParser: true, useUnifiedTopology: true});
 	let conn = mongoose.connection;

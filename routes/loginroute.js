@@ -2,69 +2,8 @@
 exports.__esModule = true;
 exports.loginroute = void 0;
 var express = require("express");
-var database_1 = require("../database");
-var crypto_1 = require("crypto");
-var uuid_1 = require("uuid");
-var uuid = require("uuid");
-var cookieParser = require('cookie-parser');
-var json = '';
-var tryAdmin = false;
+var login_controller = require('../controllers/logincontroller');
 var route = express.Router();
 exports.loginroute = route;
-route.get('/', function (req, res) {
-    if (req.headers.cookie !== undefined) {
-        if (uuid.validate(req.headers.cookie.split('=')[1])) {
-            database_1.GCookie(function (data) {
-                if (data !== null) {
-                    if (data.identity.toString() === 'admin') {
-                        res.render('adminpage');
-                    }
-                    else {
-                        res.render('login-success', { user: data.identity.toString() });
-                    }
-                }
-                else {
-                    res.render('login');
-                }
-            }, req.headers.cookie.split('=')[1]);
-        }
-        else {
-            res.render('login');
-        }
-    }
-    else {
-        res.render('login');
-    }
-});
-route.post('/', function (req, res) {
-    database_1.GPass(function (rensp) {
-        if (req.body.user.toString() === 'admin') {
-            tryAdmin = true;
-        }
-        if (crypto_1.createHash('md5').update(req.body.password).digest('hex') === rensp.password) {
-            if (tryAdmin === true) {
-                var cookie = uuid_1.v4();
-                database_1.SCookie({ identity: 'admin', value: cookie });
-                res.cookie('SESSID', cookie, {
-                    maxAge: 24 * 60 * 60 * 1000,
-                    httpOnly: true,
-                    secure: true
-                });
-                res.render('adminpage');
-            }
-            else {
-                var cookie = uuid_1.v4();
-                database_1.SCookie({ identity: req.body.user.toString(), value: cookie });
-                res.cookie('SESSID', cookie, {
-                    maxAge: 24 * 60 * 60 * 1000,
-                    httpOnly: true,
-                    secure: true
-                });
-                res.render('login-success', { user: req.body.user.toString() });
-            }
-        }
-        else {
-            res.render('fail');
-        }
-    }, { name: req.body.user.toString(), password: req.body.password.toString() }); //Con il toString sono sicuro che non ci siano oggetti
-});
+route.get('/', login_controller.index);
+route.post('/', login_controller.login);

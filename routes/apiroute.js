@@ -2,27 +2,9 @@
 exports.__esModule = true;
 exports.apiroute = void 0;
 var express = require("express");
-var database_1 = require("../database");
+var api_controller = require('../controllers/apicontroller');
 var route = express.Router();
 exports.apiroute = route;
-route.get('/getcount/articles', function (req, res) {
-    database_1.GBlogCount().then(function (data) {
-        var risposta = { number: data };
-        res.json(JSON.stringify(risposta));
-        res.end();
-    });
-});
-route.get('/getcount/sub', function (req, res) {
-    database_1.GSubCount().then(function (data) {
-        var risposta = { number: data };
-        res.json(JSON.stringify(risposta));
-        res.end();
-    });
-});
-route.get('/getcount/visitors', function (req, res) {
-    database_1.GVisitorCount(function (data) {
-        var risposta = { number: data };
-        res.json(JSON.stringify(risposta));
-        res.end();
-    });
-});
+route.get('/getcount/articles', api_controller.getCountArticles);
+route.get('/getcount/sub', api_controller.getCountSub);
+route.get('/getcount/visitors', api_controller.getCountVisitors);

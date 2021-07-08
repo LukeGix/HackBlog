@@ -8,8 +8,8 @@ import {apiroute} from './apiroute';
 const routes = Router();
 
 routes.use('/', mainroute);
-routes.use('/MyBlog', blogroute);
-routes.use('/Login', loginroute);
+routes.use('/blog', blogroute);
+routes.use('/login', loginroute);
 routes.use('/admin', adminroute);
 routes.use('/logout', logoutroute);
 routes.use('/api', apiroute);

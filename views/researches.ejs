@@ -24,7 +24,7 @@
 									<h1 id="titolo"><%-blogs[j].Title%></h1>
 									<p><%- "Author: " + ((blogs[j].Author === undefined) ? "Unknown" : blogs[j].Author) %></p>
 									<p><%- blogs[j]._id.getTimestamp().getDate() + "/" + blogs[j]._id.getTimestamp().getMonth() + "/" + blogs[j]._id.getTimestamp().getFullYear() %></p>
-									<p><%- blogs[j].Body.split('.')[0] + "..." %></p>
+									<p><%- blogs[j].Body.split(',')[0] + "..." %></p>
 									<button class="btn btn-primary">
 										<a href="<%= '/blog/researches/'+ blogs[j]._id %>">Read more</a>
 									</button>

@@ -34,7 +34,7 @@ exports.getArticleMain = function (req, res) {
 };
 exports.getArticles = function (req, res) {
     database_1.GBlog(function (rensp) {
-        rensp.Body = rensp.Body.replace("\\", "");
+        rensp.Body = rensp.Body.replace(/\\/g, "");
         res.render('ResearchModel', { blog: rensp });
     }, req.params.id.toString());
 };

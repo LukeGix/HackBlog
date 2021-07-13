@@ -43,7 +43,7 @@ exports.getArticleMain = function(req, res){
 
 exports.getArticles = function(req, res){
 	GBlog((rensp) => {
-		rensp.Body = rensp.Body.replace("\\", "");
+		rensp.Body = rensp.Body.replace(/\\/g, "");
 		res.render('ResearchModel', {blog: rensp});
 	}, req.params.id.toString())
 

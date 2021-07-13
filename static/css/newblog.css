@@ -2,3 +2,15 @@ form div {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+form {
+	padding-bottom: 390px;
+}
+
+textarea {
+	width: 50%;
+}
+
+form div input {
+	width: 50%;
+}
